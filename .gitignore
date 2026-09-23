@@ -1,0 +1,16 @@
+# Environment & Secret files
+.env
+
+# SQLite local database (Postgres is used now)
+*.sqlite3
+db.sqlite3
+
+# Python cache & virtual environments
+__pycache__/
+*.pyc
+venv/
+env/
+
+# Media uploads & local IDE settings
+media/
+.vscode/
