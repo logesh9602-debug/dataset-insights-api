@@ -17,5 +17,5 @@ A containerized Django REST API that accepts CSV and Excel dataset uploads, perf
 
 1. Clone the repository:
    ```bash
-   git clone <YOUR-GITHUB-REPO-URL>
+   git clone https://github.com/logesh9602-debug/dataset-insights-api.git
    cd dataset-insights-api
