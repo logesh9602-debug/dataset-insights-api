@@ -1,21 +1,50 @@
 # Dataset Insights API
 
-A containerized Django REST API that accepts CSV and Excel dataset uploads, performs automated profiling using Pandas, and persists analytical summaries in PostgreSQL.
+A containerized Django REST API that accepts CSV and Excel dataset uploads, performs automated dataset profiling using Pandas, and persists analytical summaries in PostgreSQL.
 
-## Tech Stack
+## 📌 Project Overview
+
+Dataset Insights API is a backend application designed to provide quick insights from uploaded datasets.
+
+The API processes CSV and Excel files and generates useful information about the dataset, including:
+
+- Row and column counts
+- Column data types
+- Missing value counts
+- Duplicate row counts
+- Numerical summary statistics
+
+## 🛠️ Tech Stack
+
 - **Backend:** Django 5.x, Django REST Framework
 - **Data Processing:** Pandas, openpyxl
 - **Database:** PostgreSQL 16
-- **Containerization:** Docker & Docker Compose
+- **Containerization:** Docker, Docker Compose
+- **Version Control:** Git, GitHub
 
-## Features
-- File upload handling (`.csv`, `.xls`, `.xlsx`).
-- Automated calculation of row/column count, column data types, missing value counts, duplicate rows, and numerical summary statistics.
-- Data persistence in PostgreSQL via Docker named volumes (`pgdata`).
+## ✨ Features
 
-## How to Run
+- 📁 CSV, XLS and XLSX file upload
+- 🔍 Automated dataset profiling
+- 📊 Row and column analysis
+- 🧩 Column data-type detection
+- ⚠️ Missing-value analysis
+- ♻️ Duplicate-row detection
+- 📈 Numerical summary statistics
+- 🗄️ PostgreSQL data persistence
+- 🐳 Docker and Docker Compose setup
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/logesh9602-debug/dataset-insights-api.git
-   cd dataset-insights-api
+## 🏗️ Application Flow
+
+```text
+Dataset Upload
+      ↓
+Django REST API
+      ↓
+Pandas Data Processing
+      ↓
+Dataset Profiling
+      ↓
+PostgreSQL
+      ↓
+Analytical Summary
