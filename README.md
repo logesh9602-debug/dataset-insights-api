@@ -48,3 +48,25 @@ Dataset Profiling
 PostgreSQL
       ↓
 Analytical Summary
+
+## API Endpoints
+
+### `POST /api/insights/`
+Upload a CSV or Excel file to retrieve dataset profiling metrics.
+
+- **Request Body**: `multipart/form-data`
+  - `file`: The `.csv` or `.xlsx` file to process.
+- **Success Response (200 OK)**:
+  ```json
+  {
+    "row_count": 100,
+    "column_count": 5,
+    "columns": ["id", "name", "age", "score", "city"],
+    "missing_values": {
+      "id": 0,
+      "name": 0,
+      "age": 2,
+      "score": 1,
+      "city": 0
+    }
+  }
