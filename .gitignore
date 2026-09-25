@@ -14,3 +14,4 @@ env/
 # Media uploads & local IDE settings
 media/
 .vscode/
+.coverage
