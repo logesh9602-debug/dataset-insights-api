@@ -1,21 +1,22 @@
+import pandas as pd
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-import pandas as pd
 
-class DatasetInsightView(APIView):
+
+class DatasetInsightsView(APIView):
     def post(self, request, *args, **kwargs):
-        file_obj = request.FILES.get('file')
-
-        if not file_obj:
+        if 'file' not in request.FILES:
             return Response(
-                {"error": "No file uploaded. Please upload a valid CSV or Excel file."},
+                {"error": "No file uploaded."},
                 status=status.HTTP_400_BAD_REQUEST
             )
 
+        file_obj = request.FILES['file']
+
         if not (file_obj.name.endswith('.csv') or file_obj.name.endswith('.xlsx')):
             return Response(
-                {"error": "Unsupported file format. Only .csv and .xlsx files are allowed."},
+                {"error": "Unsupported file format. Please upload a .csv or .xlsx file."},
                 status=status.HTTP_400_BAD_REQUEST
             )
 
@@ -31,17 +32,21 @@ class DatasetInsightView(APIView):
                     status=status.HTTP_400_BAD_REQUEST
                 )
 
-            insights = {
+            summary = {
                 "row_count": len(df),
                 "column_count": len(df.columns),
                 "columns": list(df.columns),
                 "missing_values": df.isnull().sum().to_dict(),
-                "summary": df.describe(include='all').fillna('').to_dict()
             }
-            return Response(insights, status=status.HTTP_200_OK)
+            return Response(summary, status=status.HTTP_200_OK)
 
+        except pd.errors.EmptyDataError:
+            return Response(
+                {"error": "The uploaded dataset is empty."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
         except Exception as e:
             return Response(
-                {"error": f"Failed to process file: {str(e)}"},
+                {"error": f"An error occurred while processing the file: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )

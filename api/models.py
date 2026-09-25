@@ -6,5 +6,8 @@ class Dataset(models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)
     summary_stats = models.JSONField(blank=True, null=True)
 
-    def __str__(self):
-        return self.name
+    def test_model_str(self):
+        """Test model string representation if DatasetUpload exists."""
+        from api.models import DatasetUpload
+        upload = DatasetUpload.objects.create(file_name="sample.csv")
+        self.assertEqual(str(upload), "sample.csv")
